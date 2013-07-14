@@ -27,7 +27,7 @@ static git_buf_text_stats g_stats[NUM_TEST_OBJECTS] = {
 	{ 0, 0, 4, 4, 1, 31, 0 },
 	{ 0, 1, 1, 2, 1, 9, 5 },
 	{ GIT_BOM_UTF8, 0, 0, 1, 0, 16, 0 },
-	{ GIT_BOM_UTF8, 0, 2, 2, 2, 11, 0 },
+	{ GIT_BOM_UTF8, 0, 2, 2, 2, 27, 0 },
 	{ GIT_BOM_UTF16_BE, 5, 0, 0, 0, 7, 5 },
 };
 static git_buf g_crlf_filtered[NUM_TEST_OBJECTS] = {
@@ -38,7 +38,7 @@ static git_buf g_crlf_filtered[NUM_TEST_OBJECTS] = {
 	{ "foo\nbar\rboth\nreversed\n\ragain\nproblems\r", 0, 38 },
 	{ "123\n\000\001\002\003\004abc\255\254\253\n", 0, 16 },
 	{ "\xEF\xBB\xBFThis is UTF-8\n", 0, 17 },
-	{ "\xEF\xBB\xBFほげほげ\nほげほげ\n", 0, 13 },
+	{ "\xEF\xBB\xBFほげほげ\nほげほげ\n", 0, 29 },
 	{ "\xFE\xFF\x00T\x00h\x00i\x00s\x00!", 0, 12 }
 };
 
@@ -92,10 +92,6 @@ void test_object_blob_filter__stats(void)
 		cl_git_pass(git_blob_lookup(&blob, g_repo, &g_oids[i]));
 		cl_git_pass(git_blob__getbuf(&buf, blob));
 		git_buf_text_gather_stats(&stats, &buf, false);
-                if (i == NUM_TEST_OBJECTS - 2) {
-                  cl_check(stats.printable == 27);
-                  cl_check(stats.nonprintable == 0);
-                }
 		cl_assert(memcmp(&g_stats[i], &stats, sizeof(stats)) == 0);
 		git_blob_free(blob);
 	}
