@@ -93,7 +93,7 @@ void test_object_blob_filter__stats(void)
 		cl_git_pass(git_blob__getbuf(&buf, blob));
 		git_buf_text_gather_stats(&stats, &buf, false);
                 if (i == NUM_TEST_OBJECTS - 2) {
-                  cl_assert_(stats.printable == 11, stats.printable);
+                  cl_assert_(stats.printable == 11, printf("%d", stats.printable));
                   cl_assert(stats.nonprintable == 0);
                 }
 		cl_assert(memcmp(&g_stats[i], &stats, sizeof(stats)) == 0);
