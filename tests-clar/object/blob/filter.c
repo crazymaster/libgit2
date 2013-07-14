@@ -92,6 +92,9 @@ void test_object_blob_filter__stats(void)
 		cl_git_pass(git_blob_lookup(&blob, g_repo, &g_oids[i]));
 		cl_git_pass(git_blob__getbuf(&buf, blob));
 		git_buf_text_gather_stats(&stats, &buf, false);
+                if (i == NUM_TEST_OBJECTS - 2) {
+                  printf("%d", stats);
+                }
 		cl_assert(memcmp(&g_stats[i], &stats, sizeof(stats)) == 0);
 		git_blob_free(blob);
 	}
