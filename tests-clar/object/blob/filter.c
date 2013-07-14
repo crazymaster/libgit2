@@ -99,7 +99,7 @@ void test_object_blob_filter__stats(void)
                   printf("%d", stats.lf);
                   printf("%d", stats.crlf);
                   printf("%d", stats.printable);
-                  printf("%d", stats.noprintable);
+                  printf("%d", stats.nonprintable);
                 }
 		cl_assert(memcmp(&g_stats[i], &stats, sizeof(stats)) == 0);
 		git_blob_free(blob);
