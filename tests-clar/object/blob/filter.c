@@ -93,13 +93,13 @@ void test_object_blob_filter__stats(void)
 		cl_git_pass(git_blob__getbuf(&buf, blob));
 		git_buf_text_gather_stats(&stats, &buf, false);
                 if (i == NUM_TEST_OBJECTS - 2) {
-                  printf("%d", stats.bom);
-                  printf("%d", stats.nul);
-                  printf("%d", stats.cr);
-                  printf("%d", stats.lf);
-                  printf("%d", stats.crlf);
-                  printf("%d", stats.printable);
-                  printf("%d", stats.nonprintable);
+                  cl_check_pass(printf("%d", stats.bom));
+                  cl_check_pass(printf("%d", stats.nul));
+                  cl_check_pass(printf("%d", stats.cr));
+                  cl_check_pass(printf("%d", stats.lf));
+                  cl_check_pass(printf("%d", stats.crlf));
+                  cl_check_pass(printf("%d", stats.printable));
+                  cl_check_pass(printf("%d", stats.nonprintable));
                 }
 		cl_assert(memcmp(&g_stats[i], &stats, sizeof(stats)) == 0);
 		git_blob_free(blob);
