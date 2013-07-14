@@ -92,6 +92,36 @@ void test_object_blob_filter__stats(void)
 		cl_git_pass(git_blob_lookup(&blob, g_repo, &g_oids[i]));
 		cl_git_pass(git_blob__getbuf(&buf, blob));
 		git_buf_text_gather_stats(&stats, &buf, false);
+                if (i == NUM_TEST_OBJECTS - 2) {
+                  cl_check(stats.printable == 3);
+                  cl_check(stats.printable == 4);
+                  cl_check(stats.printable == 5);
+                  cl_check(stats.printable == 6);
+                  cl_check(stats.printable == 7);
+                  cl_check(stats.printable == 8);
+                  cl_check(stats.printable == 9);
+                  cl_check(stats.printable == 10);
+                  cl_check(stats.printable == 11);
+                  cl_check(stats.printable == 12);
+                  cl_check(stats.printable == 13);
+                  cl_check(stats.printable == 14);
+                  cl_check(stats.printable == 15);
+                  cl_check(stats.printable == 16);
+                  cl_check(stats.printable == 17);
+                  cl_check(stats.printable == 18);
+                  cl_check(stats.printable == 19);
+                  cl_check(stats.printable == 20);
+                  cl_check(stats.printable == 21);
+                  cl_check(stats.nonprintable == 0);
+                  cl_check(stats.nonprintable == 1);
+                  cl_check(stats.nonprintable == 2);
+                  cl_check(stats.nonprintable == 3);
+                  cl_check(stats.nonprintable == 4);
+                  cl_check(stats.nonprintable == 5);
+                  cl_check(stats.nonprintable == 6);
+                  cl_check(stats.nonprintable == 7);
+                  cl_check(stats.nonprintable == 8);
+                }
 		cl_assert(memcmp(&g_stats[i], &stats, sizeof(stats)) == 0);
 		git_blob_free(blob);
 	}
